@@ -8,7 +8,7 @@ Created on Sun Mar  5 22:28:27 2017
 dir_path = "/Users/wangtianpei/Desktop/Chicago_png/"
 final_files=[]
 for i in range(671):
-    final_files.append(dir_path+'flow_test_{}.png'.format(i))
+    final_files.append(dir_path+'flow_final_{}.png'.format(i))
 import imageio
 images = []
 for file in final_files:
