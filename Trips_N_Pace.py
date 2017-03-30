@@ -101,10 +101,12 @@ previous_row = 0
 for i in range(sheet2.nrows-2):
     if time_stamp[i+1] != time_stamp[i]:
         Tim = Tim+1
+    '''
     if time_stamp[i+1] != time_stamp[i] and Tim-1==125:  
-        previous_row = i+1
-    
+        previous_row = i+1    
     if time_stamp[i+1] != time_stamp[i] and Tim-1>125 and Tim-1<=126:
+    '''
+    if time_stamp[i+1] != time_stamp[i]:
         m = folium.Map(
                 location=[41.923776,-87.775710],
                 zoom_start=12,
