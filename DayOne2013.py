@@ -117,8 +117,8 @@ for i in range(sheet2.nrows-2):
                     color = 'blue'
                     )
             m.add_children(census_tract)     
-        for j in range(1,77):
-            for q in range(j,77):
+        for j in range(1,78):
+            for q in range(j,78):
                 if aver_pace(j, q, previous_row, i+1) <= 0.068627:
                     Trip = folium.PolyLine(
                             [Area[j], Area[q]],

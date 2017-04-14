@@ -9,15 +9,15 @@ Created on Sat Apr  8 12:21:39 2017
 import xlrd
 
 '''Area information'''
-file_location1 = '/Users/wangtianpei/Desktop/python/Area.xls'
+file_location1 = '/Users/wangtianpei/Desktop/python/community_coordinate.xlsx'
 workbook1 = xlrd.open_workbook(file_location1)
 sheet1 = workbook1.sheet_by_index(0)
-for i in range(sheet1.nrows-1):
-    Area = [[0 for x in range(2)] for y in range(77)]
-for i in range(sheet1.nrows-1):
-    j = int(sheet1.cell_value((i+1),0))
-    Area[j][0] = sheet1.cell_value((i+1),1)
-    Area[j][1] = sheet1.cell_value((i+1),2)
+for i in range(sheet1.nrows):
+    Area = [[0 for x in range(2)] for y in range(78)]
+for i in range(sheet1.nrows):
+    j = int(sheet1.cell_value((i),0))
+    Area[j][0] = sheet1.cell_value((i),1)
+    Area[j][1] = sheet1.cell_value((i),2)
 '''Area information'''
 
 file_location2 = "/Users/wangtianpei/Desktop/python/Day_One2013.xlsx"
@@ -65,7 +65,7 @@ def image_add_text(file1,text1,text2,new_file):
     intial_po = [42.001745,-87.954131] #by observation
     center = [41.923776,-87.77571]
     draw = ImageDraw.Draw(image)
-    for j in range(1,77):
+    for j in range(1,78):
         hei = (Area[j][0]-intial_po[0])*(height1/2)/(center[0]-intial_po[0])
         wid = (Area[j][1]-intial_po[1])*(width1/2)/(center[1]-intial_po[1])
         draw.text((wid, hei),"{}".format(j),font=fnt2,fill=(0,0,0,255))
@@ -83,8 +83,8 @@ def image_add_pace(file1, start_row, end_row, new_file):
     fnt = ImageFont.truetype(dir_path+"Times New Romance.ttf", 30)
     draw = ImageDraw.Draw(image)
     n = 0
-    for j in range(1,77):
-        for q in range(j,77):
+    for j in range(1,78):
+        for q in range(j,78):
             if count_number(j, q, start_row, end_row)!=0:
                 draw.text((50+250*int((n*30)/(height1/2)), height1/2-70+(n*30)%int(height1/2)),"{}".format(j)+' to '+"{}".format(q)+':',font=fnt,fill=(0,0,0,255))
                 draw.text((170+250*int((n*30)/(height1/2)), height1/2-70+(n*30)%int(height1/2)),"{0:.4f}".format(aver_pace(j, q, start_row, end_row)),font=fnt,fill=(0,0,0,255))
