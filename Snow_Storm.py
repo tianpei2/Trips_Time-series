@@ -29,15 +29,15 @@ for i in range(sheet.nrows-1):
 '''census tract'''
 
 '''Area information'''
-file_location1 = '/Users/wangtianpei/Desktop/python/Area.xls'
+file_location1 = '/Users/wangtianpei/Desktop/python/community_coordinate.xlsx'
 workbook1 = xlrd.open_workbook(file_location1)
 sheet1 = workbook1.sheet_by_index(0)
-for i in range(sheet1.nrows-1):
-    Area = [[0 for x in range(2)] for y in range(77)]
-for i in range(sheet1.nrows-1):
-    j = int(sheet1.cell_value((i+1),0))
-    Area[j][0] = sheet1.cell_value((i+1),1)
-    Area[j][1] = sheet1.cell_value((i+1),2)
+for i in range(sheet1.nrows):
+    Area = [[0 for x in range(2)] for y in range(78)]
+for i in range(sheet1.nrows):
+    j = int(sheet1.cell_value((i),0))
+    Area[j][0] = sheet1.cell_value((i),1)
+    Area[j][1] = sheet1.cell_value((i),2)
 '''Area information'''
 
 files=[]
@@ -94,12 +94,10 @@ previous_row = 0
 for i in range(sheet2.nrows-2):
     if time_stamp[i+1] != time_stamp[i]:
         Tim = Tim+1
-        '''
-    if time_stamp[i+1] != time_stamp[i] and Tim-1==171:  
+
+    if time_stamp[i+1] != time_stamp[i] and Tim-1==160:  
         previous_row = i+1    
-    if time_stamp[i+1] != time_stamp[i] and Tim-1>171:
-        '''
-    if time_stamp[i+1] != time_stamp[i]:
+    if time_stamp[i+1] != time_stamp[i] and Tim-1>160 and Tim-1<=163:
         m = folium.Map(
                 location=[41.923776,-87.775710],
                 zoom_start=12,
@@ -116,8 +114,8 @@ for i in range(sheet2.nrows-2):
                     color = 'blue'
                     )
             m.add_children(census_tract)     
-        for j in range(1,77):
-            for q in range(j,77):
+        for j in range(1,78):
+            for q in range(j,78):
                 if aver_pace(j, q, previous_row, i+1) <= 0.068627:
                     Trip = folium.PolyLine(
                             [Area[j], Area[q]],
