@@ -54,7 +54,7 @@ from PIL import Image
 from PIL import ImageFont
 from PIL import ImageDraw
 
-def image_add_text(file1,text1,text2,new_file):
+def image_add_text(file1,text1,text2,text3,new_file):
 
     image = Image.open(file1)
     (width1, height1) = image.size
@@ -70,8 +70,9 @@ def image_add_text(file1,text1,text2,new_file):
         wid = (Area[j][1]-intial_po[1])*(width1/2)/(center[1]-intial_po[1])
         draw.text((wid, hei),"{}".format(j),font=fnt2,fill=(0,0,0,255))
     # Drawing the text on the picture
-    draw.text((width1-200, 50),text1,font=fnt,fill=(0,0,0,255))
-    draw.text((width1-200, 100),text2,font=fnt,fill=(0,0,0,255))
+    draw.text((width1-220, 50),text1,font=fnt,fill=(0,0,0,255))
+    draw.text((width1-220, 100),text2,font=fnt,fill=(0,0,0,255))
+    draw.text((width1-220, 150),text3,font=fnt,fill=(0,0,0,255))
     draw.text((20,height1/2-140),'Pace (in minutes/mile) between corresponding areas:',font=fnt1,fill=(0,0,0,255))
     draw = ImageDraw.Draw(image)
     # Save the image(overlay the original one) 
@@ -121,7 +122,13 @@ for i in range(sheet2.nrows-2):
             text2='1/31/2015'
         else:
             text2='2/'+"{0:.1f}".format(int((Tim-1)*15/1440))[0:1]+'/2015'
-        image_add_text(dir_path+'flow_test_{}.png'.format(Tim-1),text1,text2,dir_path+'flow_final_{}.png'.format(Tim-1))       
+        if text2 == '1/31/2015':
+            text3 = 'Saturday'
+        elif text2 == '2/1/2015':
+            text3 = 'Sunday'
+        elif text2 == '2/2/2015':
+            text3 = 'Monday'
+        image_add_text(dir_path+'flow_test_{}.png'.format(Tim-1),text1,text2,text3,dir_path+'flow_final_{}.png'.format(Tim-1))       
         image_add_pace(dir_path+'flow_final_{}.png'.format(Tim-1), previous_row, i+1, dir_path+'flow_final_{}.png'.format(Tim-1)) 
         final_files.append(dir_path+'flow_final_{}.png'.format(Tim-1))
         previous_row = i+1 
